@@ -52,13 +52,33 @@ public class ProcesadorPet implements Runnable {
 				f.descargar(recurso, salida);
 				
 			}else{
-				System.err.println("No existe el recuros");
-				String cad="<h1>la pagina que ud busca no existe</h1>";
-				salida.println("HTTP/1.1 404 OK");
-				salida.println("Content-type: "+"text/html");
-				salida.println("Content-length: "+cad.length());
-				salida.println();
-				salida.println(cad);
+				
+				
+				
+				String rutaError="GET /paginas/404/index.html HTTP/1.1";
+			    
+			    String partess[]=rutaError.split(" ");
+			    //no se requiere el slash (/)
+			    String recursos=partess[1].substring(1);
+			    
+			    System.err.println("No existe el recuros");
+			    salida.println("HTTP/1.1 404 OK");
+			    
+			    String contentType=getCOntentType(recursos);
+			    salida.println("Content-type: "+contentType);
+			    salida.println("Content-length: "+new File(recursos).length());
+			    
+			    salida.println();
+			    
+			    //salida.println("Content-type: "+"text/html");
+			    //salida.println("Content-length: "+cad.length());
+			    //salida.println();
+			    //salida.println(cad);
+			    
+			    
+			    FileUtil fu = new FileUtil();
+			    fu.descargar(recursos, salida);
+				
 			}
 			
 			
