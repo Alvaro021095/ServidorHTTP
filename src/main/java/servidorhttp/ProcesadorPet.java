@@ -9,7 +9,7 @@ import java.net.Socket;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
-import org.apache.commons.io.filefilter.AgeFileFilter;
+
 
 public class ProcesadorPet implements Runnable {
 
@@ -55,7 +55,7 @@ public class ProcesadorPet implements Runnable {
 				
 				
 				
-				String rutaError="GET /paginas/404/index.html HTTP/1.1";
+				String rutaError="GET /paginas/car/error_404.html HTTP/1.1";
 			    
 			    String partess[]=rutaError.split(" ");
 			    //no se requiere el slash (/)
@@ -79,14 +79,13 @@ public class ProcesadorPet implements Runnable {
 			    FileUtil fu = new FileUtil();
 			    fu.descargar(recursos, salida);
 				
-			} catch (Exception e) {
+			}
+		}catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
+finally {
 			try {
 				con.close();
 			} catch (IOException e) {
