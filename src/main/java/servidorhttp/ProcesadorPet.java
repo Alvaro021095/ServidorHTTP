@@ -79,6 +79,8 @@ public class ProcesadorPet implements Runnable {
 			    FileUtil fu = new FileUtil();
 			    fu.descargar(recursos, salida);
 				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 			
