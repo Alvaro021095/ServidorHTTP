@@ -28,10 +28,12 @@ public class ProcesadorPet implements Runnable {
 
 			Properties pro = new Properties();
 			pro.load(new FileInputStream(
-					"C:\\Users\\loter\\git\\ServidorHTTP\\src\\" + "main\\java\\properties\\prop.properties"));
+					"C:\\Users\\Jefry\\git\\ServidorHTTP\\src\\" + "main\\java\\properties\\prop.properties"));
 
 			String nuevaURL = pro.getProperty("NuevaURL");
+			
 			String estHTTP301 = pro.getProperty("EstadoHTTPPermanente");
+			
 			String url = pro.getProperty("url");
 
 			System.out.println("procesando peticion peticion!!!!!!");
@@ -54,33 +56,6 @@ public class ProcesadorPet implements Runnable {
 				salida.println("Content-Length: 219");				
 				salida.println();
 				
-<<<<<<< HEAD
-			}else{
-				
-				
-				
-				String rutaError="paginas/car/error_404.html";
-			    
-			   
-			    System.err.println("No existe el recuros");
-			    salida.println("HTTP/1.1 404 OK");
-			    
-			    String contentType=getCOntentType(rutaError);
-			    salida.println("Content-type: "+contentType);
-			    salida.println("Content-length: "+new File(rutaError).length());
-			    
-			    salida.println();
-			    
-			    //salida.println("Content-type: "+"text/html");
-			    //salida.println("Content-length: "+cad.length());
-			    //salida.println();
-			    //salida.println(cad);
-			    
-			    
-			    FileUtil fu = new FileUtil();
-			    fu.descargar(rutaError, salida);
-				
-=======
 			} else {
 
 				boolean existe = new File(recurso).exists();
@@ -97,32 +72,31 @@ public class ProcesadorPet implements Runnable {
 
 				} else {
 
-					String rutaError = "GET /paginas/car/error_404.html HTTP/1.1";
+					String rutaError =  pro.getProperty("404");
 
-					String partess[] = rutaError.split(" ");
-					// no se requiere el slash (/)
-					String recursos = partess[1].substring(1);
+					
 
 					System.err.println("No existe el recuros");
 					salida.println("HTTP/1.1 404 OK");
 
-					String contentType = getCOntentType(recursos);
+					String contentType = getCOntentType(rutaError);
 					salida.println("Content-type: " + contentType);
-					salida.println("Content-length: " + new File(recursos).length());
+					salida.println("Content-length: " + new File(rutaError).length());
 
 					salida.println();
 
 					FileUtil fu = new FileUtil();
-					fu.descargar(recursos, salida);
+					fu.descargar(rutaError, salida);
 
 				}
->>>>>>> branch 'master' of https://github.com/Alvaro021095/ServidorHTTP.git
+			
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		finally {
+		}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+finally {
 			try {
 				con.close();
 			} catch (IOException e) {
@@ -130,7 +104,7 @@ public class ProcesadorPet implements Runnable {
 				e.printStackTrace();
 			}
 		}
-
+		
 	}
 
 	public String getCOntentType(String nombre) {
