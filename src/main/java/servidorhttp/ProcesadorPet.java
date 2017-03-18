@@ -55,18 +55,15 @@ public class ProcesadorPet implements Runnable {
 				
 				
 				
-				String rutaError="GET /paginas/car/error_404.html HTTP/1.1";
+				String rutaError="paginas/car/error_404.html";
 			    
-			    String partess[]=rutaError.split(" ");
-			    //no se requiere el slash (/)
-			    String recursos=partess[1].substring(1);
-			    
+			   
 			    System.err.println("No existe el recuros");
 			    salida.println("HTTP/1.1 404 OK");
 			    
-			    String contentType=getCOntentType(recursos);
+			    String contentType=getCOntentType(rutaError);
 			    salida.println("Content-type: "+contentType);
-			    salida.println("Content-length: "+new File(recursos).length());
+			    salida.println("Content-length: "+new File(rutaError).length());
 			    
 			    salida.println();
 			    
@@ -77,7 +74,7 @@ public class ProcesadorPet implements Runnable {
 			    
 			    
 			    FileUtil fu = new FileUtil();
-			    fu.descargar(recursos, salida);
+			    fu.descargar(rutaError, salida);
 				
 			}
 		}catch (Exception e) {
